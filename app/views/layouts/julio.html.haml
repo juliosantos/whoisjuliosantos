@@ -1,0 +1,26 @@
+!!! 5
+%html
+  %head
+    %title
+      Júlio Santos
+    %meta{ :charset => "utf-8" }
+    = stylesheet_link_tag "reset", "style", { :media => "screen, projection" }
+
+    = csrf_meta_tag
+
+  %body{ :id => "#{controller_name}-#{params[:action]}" }
+
+    %div
+      = image_tag "title.png", :alt => "Júlio Santos, software engineer and nice guy"
+    
+    %ul#navigation
+      %li#index
+        = link_to "Home", home_path
+      %li#cv
+        = link_to "CV", cv_path
+      %li#contact
+        = link_to "Contact", contact_path
+
+    = yield
+
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", "application"
