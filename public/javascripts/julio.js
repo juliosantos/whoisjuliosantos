@@ -3,7 +3,7 @@ $( document ).ready( function () {
 		img : "/images/background.jpg"
 	});
 
-  setTimeout( function(){ floatbg(-1) }, 1000 );
+  //setTimeout( function(){ floatbg(-1) }, 1000 );
 });
 
 function floatbg (direction) {
