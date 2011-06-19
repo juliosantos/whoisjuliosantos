@@ -4,6 +4,7 @@ a, a:visited {
 }
 
 a:hover {
+  color: #680E3F;
   text-decoration: underline;
 }
 
@@ -19,7 +20,6 @@ a:hover {
 h1 {
   font-weight: bold;
   font-style: italic;
-  /*color: #410928;*/
   font-size: 42px;
   line-height: 36px;
   margin-bottom: 20px;
