@@ -1,5 +1,5 @@
 a, a:visited {
-  color: #9E4500;
+  color: #680E3F;
   text-decoration: none;
 }
 
@@ -8,11 +8,11 @@ a:hover {
 }
 
 #content {
-  color: black;
+  color: #30312d;
   margin: 175px auto 0 auto;
   text-align: center;
   max-width: 400px;
-  font-family: Georgia, sans-serif;
+  font-family: "Georgia", "Nimbus Roman No9 L", sans-serif;
   font-style: italic;
 }
 
@@ -20,7 +20,7 @@ h1 {
   font-family: Georgia, sans-serif;
   font-weight: bold;
   font-style: italic;
-  color: #410928;
+  /*color: #410928;*/
   font-size: 42px;
   line-height: 36px;
   margin-bottom: 20px;
@@ -28,7 +28,7 @@ h1 {
 
 h1 span {
   font-weight: normal;
-  color: #680e3f;
+  color: #f2c6a0;
 }
 
 #about p {
