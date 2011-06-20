@@ -8,6 +8,10 @@ a:hover {
   text-decoration: underline;
 }
 
+body {
+  background-color: #a79462;
+}
+
 #content {
   color: #30312d;
   margin: 175px auto 0 auto;
@@ -15,9 +19,6 @@ a:hover {
   max-width: 400px;
   font-family: "Georgia", "Nimbus Roman No9 L", sans-serif;
   font-style: italic;
-}
-
-#content p {
 }
 
 h1 {
