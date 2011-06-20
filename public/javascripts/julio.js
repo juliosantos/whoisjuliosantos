@@ -1,9 +1,5 @@
 $( document ).ready( function () {
-	$( "body" ).ezBgResize({
-		img : "/images/background.jpg"
-	});
-
-  //setTimeout( function(){ floatbg(-1) }, 1000 );
+  $.backstretch( "/images/background.jpg", { speed: 500 }, zoombg );
 });
 
 function floatbg (direction) {
@@ -14,5 +10,19 @@ function floatbg (direction) {
     "top" : old_top - direction * 60
   }, 6000, "easeInOutQuad", function () {
     floatbg( -direction );
+  });
+};
+
+function zoombg () {
+  var background = $( "div#backstretch img" );
+  old_top = parseInt( background.css( "top" ).replace( "px", "" ) );
+  old_left = parseInt( background.css( "left" ).replace( "px", "" ) );
+
+  background.animate({
+    "width" : background.width() * 2,
+    "height" : background.height() * 2,
+    "top" : old_top - background.height() / 2,
+    "left" : old_left - background.width() / 2
+  }, 40000, "linear", function () {
   });
 };
