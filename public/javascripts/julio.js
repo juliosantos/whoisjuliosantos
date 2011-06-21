@@ -4,7 +4,6 @@ $( document ).ready( function () {
 });
 
 function hypnoToad () {
-  console.log("BANG");
   $( "div#backstretch" ).remove();
   $( "body" ).css({ "background" : "#FFF url( /images/hypnotoad.gif )" });
 };
