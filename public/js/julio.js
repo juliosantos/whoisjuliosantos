@@ -1,11 +1,11 @@
 $( document ).ready( function () {
-  $.backstretch( "/images/background.jpg", { speed: 500 }, function () { zoombg( 1 ); } );
+  $.backstretch( "/img/background.jpg", { speed: 500 }, function () { zoombg( 1 ); } );
   $( window ).konami( hypnoToad );
 });
 
 function hypnoToad () {
   $( "div#backstretch" ).remove();
-  $( "body" ).css({ "background" : "#FFF url( /images/hypnotoad.gif )" });
+  $( "body" ).css({ "background" : "#FFF url( /img/hypnotoad.gif )" });
 };
 
 function floatbg (direction) {
