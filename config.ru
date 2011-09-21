@@ -5,6 +5,10 @@ run lambda { |env|
 
   if extension == "pdf"
     mime_type = "application/pdf"
+  elsif extension == "jpg"
+    mime_type = "image/jpeg"
+  elsif extension == "js"
+    mime_type = "application/javascript"
   else
     mime_type = "text/#{extension}"
   end
