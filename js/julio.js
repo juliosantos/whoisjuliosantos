@@ -1,12 +1,6 @@
 $( document ).ready( function () {
   $.backstretch( "/img/background.jpg", { speed: 500 }, function () { zoombg( 1 ); } );
-  $( window ).konami( hypnoToad );
 });
-
-function hypnoToad () {
-  $( "div#backstretch" ).remove();
-  $( "body" ).css({ "background" : "#FFF url( /img/hypnotoad.gif )" });
-};
 
 function floatbg (direction) {
   var background = $( "div#jq_ez_bg" ).children( "img" );
