@@ -4,13 +4,13 @@ run lambda { |env|
   extension = path.match(/.*\.(.*)/)[1]
 
   if extension == "pdf"
-    mime-type = "application/pdf"
+    mime_type = "application/pdf"
   else
-    mime-type = "text/#{extension}"
+    mime_type = "text/#{extension}"
   end
 
   if (File.exists?(path))
-    [200, {"Content-Type"=>mime-type}, File.new(path)]
+    [200, {"Content-Type"=>mime_type}, File.new(path)]
   else
     [404, {"Content-Type"=>"text/html"}, String.new("404 Not Found")]
   end
