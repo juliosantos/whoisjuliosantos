@@ -1,7 +1,12 @@
 run lambda { |env|
   path = env["REQUEST_PATH"][1..-1]
   path = "index.html" if path.empty?
-  extension = path.match(/.*\.(.*)/)[1]
+
+  begin
+    extension = path.match(/.*\.(.*)/)[1]
+  rescue
+    extension = "html"
+  end
 
   if extension == "pdf"
     mime_type = "application/pdf"
