@@ -1,33 +1,51 @@
 #!/usr/bin/env bash
+set -ueo pipefail
 
-FORCE=$1
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+function plan {
+  sync false
+}
 
 function sync {
-  COMMAND="aws s3 sync --delete --acl public-read --exclude \".git/*\" . s3://www.whoisjuliosantos.com/"
+  AWS_COMMAND="aws s3 sync . s3://www.whoisjuliosantos.com/
+    --delete
+    --acl public-read
+    --exclude \"deploy.sh\"
+    --exclude \".git/*\""
 
-  if [ $1 != true ]; then
-    COMMAND="$COMMAND --dryrun"
-  fi
+  [[ $1 != true ]] && AWS_COMMAND="$AWS_COMMAND --dryrun"
 
-  echo "Executing: $COMMAND"
-  eval $COMMAND
+  run_aws_command "$AWS_COMMAND"
 }
 
 function invalidate {
-  COMMAND="aws cloudfront create-invalidation --distribution-id E18YZMBAXAMT8Y --paths \"/index.html\""
-
-  echo "Executing: $COMMAND"
-  eval $COMMAND
+  run_aws_command "aws cloudfront create-invalidation
+    --distribution-id E18YZMBAXAMT8Y
+    --paths \"/index.html\""
 }
 
-sync false
+function run_aws_command {
+  echo >&2 "${bold}>${normal} $@"
+  eval $@
+}
 
-read -p "Sync to S3? (y/n) " YN1
-if [ "$YN1" != y ]; then exit; fi
+function next_or_exit {
+  echo
+  read -p "${bold}$@ (y/n)${normal} " YN
+  [[ $YN != y ]] && end || return 0
+}
 
+function end {
+  [[ $# -gt 0 ]] && echo -e "\n${bold}$@${normal}"
+  exit 0
+}
+
+[[ $(plan | tee /dev/tty) = "" ]] && end "Nothing to sync: stopping."
+
+next_or_exit "Sync to S3?"
 sync true
 
-read -p "Create Cloudfront invalidation for index.html? (y/n) " YN2
-if [ "$YN2" != y ]; then exit; fi
-
+next_or_exit "Create Cloudfront invalidation for index.html?"
 invalidate
