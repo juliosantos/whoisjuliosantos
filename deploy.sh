@@ -9,21 +9,29 @@ function plan {
 }
 
 function sync {
-  AWS_COMMAND="aws s3 sync . s3://www.whoisjuliosantos.com/
-    --delete
-    --acl public-read
-    --exclude \"deploy.sh\"
-    --exclude \".git/*\""
+  AWS_COMMAND=$(cat <<EOF
+aws s3 sync dist/ s3://www.whoisjuliosantos.com/
+  --delete
+  --acl public-read
+  --exclude "deploy.sh"
+  --exclude ".git/*"
+EOF
+  )
 
-  [[ $1 != true ]] && AWS_COMMAND="$AWS_COMMAND --dryrun"
+  [[ $1 != true ]] && AWS_COMMAND+=$(echo -e "\n  --dryrun")
 
   run_aws_command "$AWS_COMMAND"
 }
 
 function invalidate {
-  run_aws_command "aws cloudfront create-invalidation
-    --distribution-id E18YZMBAXAMT8Y
-    --paths \"/index.html\""
+  AWS_COMMAND=$(cat <<EOF
+aws cloudfront create-invalidation
+  --distribution-id E18YZMBAXAMT8Y
+  --paths "/index.html"
+EOF
+  )
+
+  run_aws_command "$AWS_COMMAND"
 }
 
 function run_aws_command {
@@ -42,6 +50,7 @@ function end {
   exit 0
 }
 
+echo "${bold}Planning...${normal}"
 [[ $(plan | tee /dev/tty) = "" ]] && end "Nothing to sync: stopping."
 
 next_or_exit "Sync to S3?"
